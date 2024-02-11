@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tst
+  namespace: java
+  labels:
+    app: tst
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tst
+  template:
+    metadata:
+      labels:
+        app: tst
+    spec:
+      containers:
+        - image: tst2.ru-central1.internal:5000/tst
+          name: tst
+          ports:
+          - containerPort: 8000
+
+      restartPolicy: Always
