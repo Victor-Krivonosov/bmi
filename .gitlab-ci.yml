@@ -1,0 +1,31 @@
+stages:
+  - build
+  - deploy
+  - remove
+image: docker
+
+variables:
+   DOCKER_HOST: ""
+
+build-job:
+  stage: build
+  script:
+    - echo "Start build job"
+    - docker build -f Dockerfile -t tst2.ru-central1.internal:5000/tst .
+    - docker push tst2.ru-central1.internal:5000/tst
+
+deploy:
+  stage: deploy
+  image: tst2.ru-central1.internal:5000/myhelm
+  script:
+    - kubectl get po
+    # - docker tst2.ru-central1.internal:5000/TST
+    # - pwd
+    # - docker run -d -p 80:8000 tst2.ru-central1.internal:5000/TST
+  allow_failure: true
+
+remove:
+  stage: remove
+  script:
+    - docker-compose down
+  when: manual
