@@ -18,10 +18,7 @@ deploy:
   stage: deploy
   image: tst2.ru-central1.internal:5000/myhelm
   script:
-    - kubectl get po
-    # - docker tst2.ru-central1.internal:5000/TST
-    # - pwd
-    # - docker run -d -p 80:8000 tst2.ru-central1.internal:5000/TST
+    - kubectl apply -f k3s/.
   allow_failure: true
 
 remove:
