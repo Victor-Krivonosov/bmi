@@ -18,7 +18,8 @@ deploy:
   stage: deploy
   image: tst2.ru-central1.internal:5000/myhelm
   script:
-    - kubectl apply -f k3s/.
+    #- kubectl apply -f k3s/.
+    - helm install hello-app helm/
   allow_failure: true
 
 remove:
